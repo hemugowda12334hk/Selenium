@@ -2,15 +2,9 @@ image:
   file: Dockerfile
 
 tasks:
-  - name: Install Dependencies
+  - name: Initialize Maven Project
     init: |
-      echo "Updating packages and installing dependencies..."
-      sudo apt-get update
-      sudo apt-get install -y git wget unzip xvfb
-      sudo apt-get install -y openjdk-17-jdk
+      echo "Building project dependencies..."
+      mvn clean install
     command: |
-      echo "Dependencies installed successfully."
-
-  - name: Build Maven Project
-    init: echo "Building Maven project..."
-    command: mvn clean install
+      echo "Environment ready. You can run your Selenium tests."
