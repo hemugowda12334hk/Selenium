@@ -2,15 +2,15 @@ image:
   file: Dockerfile
 
 tasks:
-  - init: |
+  - name: Install Dependencies
+    init: |
+      echo "Updating packages and installing dependencies..."
       sudo apt-get update
-      sudo apt-get install -y wget unzip xvfb
-      wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
-      wget https://chromedriver.storage.googleapis.com/$(wget -q -O - https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip
-      unzip chromedriver_linux64.zip
-      sudo mv chromedriver /usr/local/bin/
-      sudo chmod +x /usr/local/bin/chromedriver
-      sudo apt-get install -y openjdk-17-jdk maven
-  command: |
-      echo "Environment ready for Selenium with Java."
+      sudo apt-get install -y git wget unzip xvfb
+      sudo apt-get install -y openjdk-17-jdk
+    command: |
+      echo "Dependencies installed successfully."
+
+  - name: Build Maven Project
+    init: echo "Building Maven project..."
+    command: mvn clean install
