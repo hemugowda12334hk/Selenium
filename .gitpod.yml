@@ -1,10 +1,9 @@
 image:
-  file: Dockerfile
+  file: Dockerfile  # Use the Dockerfile you created for the workspace
 
 tasks:
-  - name: Initialize Maven Project
+  - name: Build Maven Project
     init: |
-      echo "Building project dependencies..."
-      mvn clean install
+      mvn clean install  # Build the project
     command: |
-      echo "Environment ready. You can run your Selenium tests."
+      echo "Project setup is complete."
